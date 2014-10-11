@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CSV to JSON Converter in HTML5 | TechSlides</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<p>Drop any a CSV file to load it.</p>
+			<div class="row">
+				<div class="col-sm-4">
+					<div id="drop" class="bg-info">
+						DROP!<button onclick="document.querySelector('input').click()">Or Select</button>
+						<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+					</div>
+				</div>
+			</div>
+
+			<div id="output">
+
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
