@@ -12,9 +12,14 @@
 			<h2>Drop any CSV file to load it.</h2>
 			<div class="row">
 				<div class="col-sm-4">
+					<div if="file-uploader" class="col-sm-offset-2">
+						<button onclick="document.querySelector('input').click()"><strong>Select a File</strong></button>
+					</div>
 					<form class="form-horizontal" role="form">
-						<div class="form-group bg-info" id="drop">
-							<label for="select-file" class="col-sm-12 control-label">Drop the file <button onclick="document.querySelector('input').click()">Or Select</button></label>
+						<div class="form-group" id="drop">
+							<label for="select-file" class="col-sm-offset-2 col-sm-10 control-label" style="text-align:left">
+								Or drop it on the window!
+							</label>
 							<div class="col-sm-0">
 								<input id="select-file" style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
 							</div>
@@ -32,15 +37,21 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
+							<div class="col-sm-offset-2 col-sm-4">
 								<button id="btn-draw" type="button" class="btn btn-default">Draw!</button>
 							</div>
+							<div class="col-sm-offset-2 col-sm-4">
+								<button id="btn-reset" type="button" class="btn btn-default">Reset!</button>
+							</div>
 						</div>
-					</form>	
+					</form>
+
 				</div>
 				<div id="graph" class="col-sm-8">
 
 				</div>
+			</div>
+			<div class="row" id="row-name">
 			</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
