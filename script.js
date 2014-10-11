@@ -1,21 +1,23 @@
 
 
 var output = document.getElementById("output");
-
+var activeData;
+var X;
+var Y;
 
 //var csv is the CSV file with headers
-function csvJSON(csv){
+function csvJSON(csv, sep){
  
   var lines=csv.split("\n");
  
   var result = [];
  
-  var headers=lines[0].split(",");
+  var headers=lines[0].split(sep);
  
   for(var i=1;i<lines.length;i++){
  
 	  var obj = {};
-	  var currentline=lines[i].split(",");
+	  var currentline=lines[i].split(sep);
  
 	  for(var j=0;j<headers.length;j++){
 		  obj[headers[j]] = currentline[j];
@@ -25,10 +27,9 @@ function csvJSON(csv){
  
   }
   
-  //return result; //JavaScript object
-  return JSON.stringify(result); //JSON
+  return result; //JavaScript object
+  //return JSON.stringify(result); //JSON
 }
-
 
 
 
@@ -50,24 +51,68 @@ function upload(file) {
 	if(file.name.slice(-4) == ".csv"){
     	oFReader = new FileReader();
         oFReader.onloadend = function() {
-
-        	//console.log(csvJSON(this.result));
-
-        	var json = csvJSON(this.result);
-        	
-        	/*	these lines create json file.
-        	 *
-        	 *
-        	var blob = new Blob([json], {type: 'application/json'});
-        	var url = URL.createObjectURL(blob);
-        	output.innerHTML = '<a href="'+url+'">JSON file</a>';
-			*/
-
-
-        };
+        	activeData = csvJSON(this.result, ";");
+          console.log("csv file loaded");
+        }
         oFReader.readAsText(file);
+
     } else {
     	console.log("This file does not seem to be a CSV.");
-    	console.log(file.name.slice(-4));
     }
 }
+
+function JSONextract(abs, ord, data){
+  
+  var res = [];
+  var tmp = [];
+  res.push([abs, ord]);
+  $.each(data, function(index){
+    if(this['"' + abs + '"'] !== undefined && this['"' + ord + '"'] !== undefined)
+      res.push([parseInt(this['"' + abs + '"']),parseFloat(this['"' + ord + '"'])]);
+  });
+
+
+  return res;
+}
+
+// Callback that creates and populates a data table, 
+// instantiates the chart, passes in the data and
+// draws it.
+function drawChart(myData) {
+  var data = google.visualization.arrayToDataTable(myData);
+  console.log("draw object");
+  console.log(data);
+  // Create the data table.
+
+  var options = {
+    title: X + ' vs. ' + Y,
+    width: 800, 
+    height: 480, 
+    titleX: X, 
+    titleY: Y,
+    legend: 'none', 
+    pointSize: 5
+  };
+
+  var chart = new google.visualization.ScatterChart(document.getElementById('graph'));
+  chart.draw(data, options);
+
+};
+
+
+$(document).ready(function(){
+
+  $('#btn-draw').click(function(){
+      X = $('#abs-input').val();
+      Y = $('#ord-input').val()
+      drawChart(JSONextract(X, Y, activeData));
+
+  });
+
+});
+/*
+Sources:
+
+Upload csv: http://techslides.com/convert-csv-to-json-in-javascript/
+
+*/
