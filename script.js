@@ -76,8 +76,10 @@ function JSONextract(abs, ord, data) {
 function getHeader(){
   var i;
   for (i=0;i<headers.length;i++){
-    if(headers[i] !== undefined)
+    if(headers[i] !== undefined){
       $('#abs-input').append('<option>' + headers[i] + '</option>');
+      $('#ord-input').append('<option>' + headers[i] + '</option>');
+    }
   }
 } 
 
