@@ -116,6 +116,16 @@ function drawChart(myData) {
 			};
 			chart = new google.visualization.BarChart(document.getElementById('graph'));
 			break;
+		case "column" : 
+			options = {
+			  title: X + ' vs. ' + Y,
+			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
+			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  width: 800,
+			  height: 480
+			};
+			chart = new google.visualization.ColumnChart(document.getElementById('graph'));
+			break;
 		default : 
 			break;
 	}
