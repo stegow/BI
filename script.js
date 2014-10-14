@@ -61,16 +61,42 @@ function upload(file) {
 }
 
 /*extract Google chart array from JSON blob*/
-function JSONextract(abs, ord, data) {
+function JSONextractNumber(abs, ord, data) {
 
     var res = [];
     var tmp = [];
     res.push([abs, ord]);
     $.each(data, function (index) {
-        if (this[abs] !== undefined && this[ord] !== undefined) res.push([parseInt(this[abs]), parseFloat(this[ord])]);
+        if (this[abs] !== undefined && this[ord] !== undefined) res.push([parseFloat(this[abs]), parseFloat(this[ord])]);
     });
     console.log(res);
     return res;
+}
+
+/*extract Google chart array from JSON blob*/
+function JSONextractString(abs, ord, data) {
+
+    var res = [];
+    var tmp = [];
+    res.push([abs, ord]);
+    $.each(data, function (index) {
+        if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
+    });
+    console.log(res);
+    return res;
+}
+
+/*extract Google chart array from JSON blob*/
+function JSONextractSort(abs, ord, data) {
+
+    var res = [];
+    var tmp = [];
+    res.push([abs, ord]);
+    $.each(data, function (index) {
+        if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
+    });
+    console.log(res);
+    return res.sort([{column:1}]);
 }
 
 function getHeader(){
@@ -86,10 +112,11 @@ function getHeader(){
 // Callback that creates and populates a data table, 
 // instantiates the chart, passes in the data and
 // draws it.
-function drawChart(myData) {
+function drawChart() {
 
-    var data = google.visualization.arrayToDataTable(myData);
-    // Create the data table.
+    	var myData;
+    	
+    	// Create the data table.
 	var typeChart = $('#type-select').children(':selected').attr('id');
 	var options;
 	var chart;
@@ -104,6 +131,7 @@ function drawChart(myData) {
 				legend: 'none',
 				pointSize: 5
 			};
+			myData = JSONextractNumber(X,Y,activeData);
 			chart = new google.visualization.ScatterChart(document.getElementById('graph'));			
 			break;
 		case "bar" : 
@@ -114,6 +142,7 @@ function drawChart(myData) {
 			  width: 800,
 			  height: 480
 			};
+			myData = JSONextractString(X,Y,activeData);
 			chart = new google.visualization.BarChart(document.getElementById('graph'));
 			break;
 		case "column" : 
@@ -124,6 +153,7 @@ function drawChart(myData) {
 			  width: 800,
 			  height: 480
 			};
+			myData = JSONextractString(X,Y,activeData);
 			chart = new google.visualization.ColumnChart(document.getElementById('graph'));
 			break;
 		case "line" : 
@@ -134,6 +164,7 @@ function drawChart(myData) {
 			  width: 800,
 			  height: 480
 			};
+			myData = JSONextractSort(X,Y,activeData);
 			chart = new google.visualization.LineChart(document.getElementById('graph'));
 			break;
 		case "pie" :
@@ -144,13 +175,14 @@ function drawChart(myData) {
 			  width: 800,
 			  height: 480
 			};
+			myData = JSONextractString(X,Y,activeData);
 			chart = new google.visualization.PieChart(document.getElementById('graph'));
 			break;
 		default : 
 			break;
 	}
 
-    
+    var data = google.visualization.arrayToDataTable(myData);
     chart.draw(data, options);
 
 }
@@ -162,7 +194,7 @@ $(document).ready(function () {
         X = $('#abs-input').val();
         Y = $('#ord-input').val();
         console.log('drawing...');
-        drawChart(JSONextract(X, Y, activeData));
+        drawChart();
     });
 
     $('#btn-reset').click(function () {
