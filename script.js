@@ -119,8 +119,8 @@ function drawChart(myData) {
 		case "column" : 
 			options = {
 			  title: X + ' vs. ' + Y,
-			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
-			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  vAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  hAxis: {title: X,  titleTextStyle: {color: 'red'}},
 			  width: 800,
 			  height: 480
 			};
@@ -129,8 +129,8 @@ function drawChart(myData) {
 		case "line" : 
 			options = {
 			  title: X + ' vs. ' + Y,
-			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
-			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  vAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  hAxis: {title: X,  titleTextStyle: {color: 'red'}},
 			  width: 800,
 			  height: 480
 			};
