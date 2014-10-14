@@ -91,12 +91,13 @@ function JSONextractSort(abs, ord, data) {
 
     var res = [];
     var tmp = [];
-    res.push([abs, ord]);
     $.each(data, function (index) {
         if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
     });
     console.log(res);
-    return res.sort([{column:1}]);
+	res.sort([{column:1}]);
+	res.push([abs, ord]);
+    return res;
 }
 
 function getHeader(){
