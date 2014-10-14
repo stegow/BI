@@ -89,18 +89,37 @@ function drawChart(myData) {
 
     var data = google.visualization.arrayToDataTable(myData);
     // Create the data table.
+	var typeChart = $('#type-select').children(':selected').attr('id');
+	var options;
+	var chart;
+	switch(typeChart) {
+		case "scatter" :
+			options = {
+				title: X + ' vs. ' + Y,
+				width: 800,
+				height: 480,
+				titleX: X,
+				titleY: Y,
+				legend: 'none',
+				pointSize: 5
+			};
+			chart = new google.visualization.ScatterChart(document.getElementById('graph'));			
+			break;
+		case "bar" : 
+			options = {
+			  title: X + ' vs. ' + Y,
+			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
+			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  width: 800,
+			  height: 480
+			};
+			chart = new google.visualization.BarChart(document.getElementById('graph'));
+			break;
+		default : 
+			break;
+	}
 
-    var options = {
-        title: X + ' vs. ' + Y,
-        width: 800,
-        height: 480,
-        titleX: X,
-        titleY: Y,
-        legend: 'none',
-        pointSize: 5
-    };
-
-    var chart = new google.visualization.ScatterChart(document.getElementById('graph'));
+    
     chart.draw(data, options);
 
 }
