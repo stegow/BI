@@ -91,13 +91,32 @@ function JSONextractSort(abs, ord, data) {
 
     var res = [];
     var tmp = [];
+	res.push([0,0]);
     $.each(data, function (index) {
         if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
     });
-    console.log(res);
+    
 	res.sort([{column:1}]);
-	res.push([abs, ord]);
+	res[0]=[abs, ord];
+	console.log("coucou");
+	console.log(res);
     return res;
+}
+
+function JSONextractCount(abs, data){
+	var res = [];
+	var tmp = [];
+	var zero = 0, un = 0;
+	$.each(data, function(index){
+		if (this[abs] === undefined) {}
+		else this[abs] == 0 ? zero++ : un++;
+		console.log(this);
+	});
+	
+	res[0] = [abs,""];
+	res[1] = ["false", zero];
+	res[2] = ["true", un];
+	return res;
 }
 
 function getHeader(){
@@ -154,7 +173,7 @@ function drawChart() {
 			  width: 800,
 			  height: 480
 			};
-			myData = JSONextractString(X,Y,activeData);
+			myData = JSONextractSort(X,Y,activeData);
 			chart = new google.visualization.ColumnChart(document.getElementById('graph'));
 			break;
 		case "line" : 
@@ -176,7 +195,7 @@ function drawChart() {
 			  width: 800,
 			  height: 480
 			};
-			myData = JSONextractString(X,Y,activeData);
+			myData = JSONextractCount(X,activeData);
 			chart = new google.visualization.PieChart(document.getElementById('graph'));
 			break;
 		default : 
@@ -201,7 +220,13 @@ $(document).ready(function () {
     $('#btn-reset').click(function () {
         window.location.reload();
     });
-
+	
+	$('#type-select').change(function(){
+		console.log($('#type-select').children(':selected').attr('id'));
+		if($('#type-select').children(':selected').attr('id') == 'pie'){
+			$('#group-ord').hide();
+		} else $('#group-ord').show();
+	});
 });
 /*
 Sources:
