@@ -74,12 +74,11 @@ function JSONextract(abs, ord, data) {
 }
 
 function getHeader(){
-  var i,res = "";
+  var i;
   for (i=0;i<headers.length;i++){
     if(headers[i] !== undefined)
-      res += "<br/>" + headers[i];
+      $('#abs-input').append('<option>' + headers[i] + '</option>');
   }
-  $("#row-name").append("Avalaible Rows:" + res);
 } 
 
 // Callback that creates and populates a data table, 
