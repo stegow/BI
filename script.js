@@ -31,6 +31,7 @@ function csvJSON(csv, sep) {
 
 
 /* Drag drop stuff */
+/*
 window.ondragover = function (e) {
     e.preventDefault();
 };
@@ -44,7 +45,7 @@ window.ondrop = function (e) {
         upload(e.dataTransfer.files[0]);
     }
 };
-
+*/
 /* main upload function */
 function upload(file) {
     if (file.name.slice(-4) == ".csv") {
@@ -96,7 +97,7 @@ function JSONextractSort(abs, ord, data) {
         if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
     });
     
-	res.sort([{column:1}]);
+	res.sort(/*[{column:1},{column:0}]*/);
 	res[0]=[abs, ord];
 	console.log("coucou");
 	console.log(res);
