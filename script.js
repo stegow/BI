@@ -84,6 +84,21 @@ function JSONextractNumber(abs, ord, data) {
     return res;
 }
 
+/* extract Google Chart Array from JSON blob */
+function JSONextractNumber2(abs, ord1, ord2, data) {
+
+    var res = [];
+    var tmp = [];
+	console.log(abs + " " + ord1 + " " + ord2)
+    res.push([abs, ord1, ord2]);
+    $.each(data, function (index) {
+		if (this[abs] !== undefined && this[ord1] !== undefined && this[ord2] !== undefined && this[ord1] != "NA" && this[abs] != "NA" && this[ord2] != "NA") 
+			res.push([parseFloat(this[abs]), parseFloat(this[ord1]), parseFloat(this[ord2])]);
+    });
+    console.log(res);
+    return res;
+}
+
 /*extract Google chart array from JSON blob*/
 function JSONextractString(abs, ord, data) {
 
