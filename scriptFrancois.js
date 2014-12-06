@@ -4,7 +4,7 @@ function drawPie(id, column) {
 			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
 			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
 			  width: $(id).width(),
-			  height: $(id).height()
+			  height: 300
 			};
 			myData = JSONextractCount(column,activeData);
 			chart = new google.visualization.PieChart(document.getElementById(id));
