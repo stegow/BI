@@ -1,5 +1,5 @@
 var typeChart;
-var X =;
+var X;
 
 $(document).ready(function () {
   typeChart = "pie";
