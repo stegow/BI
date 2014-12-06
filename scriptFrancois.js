@@ -1,8 +1,3 @@
-var options;
-var myData;
-var data;
-var chart;
-
 function drawPie(id) {
   			options = {
 			  title: X + ' vs. ' + Y,
@@ -13,6 +8,6 @@ function drawPie(id) {
 			};
 			myData = JSONextractCount("node",activeData);
 			chart = new google.visualization.PieChart(document.getElementById(id));
-			data = google.visualization.arrayToDataTable(myDataPie);
+			data = google.visualization.arrayToDataTable(myData);
 			chart.draw(data, options);
 }

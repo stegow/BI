@@ -242,8 +242,8 @@ $(document).ready(function () {
         X = $('#abs-input').val();
         Y = $('#ord-input').val();
         console.log('drawing...');
-        drawChart();
-        drawPie();
+        drawChart("graph");
+        drawPie("pie_1");
     });
 
     $('#btn-reset').click(function () {
