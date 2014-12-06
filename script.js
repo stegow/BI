@@ -67,9 +67,18 @@ function JSONextractNumber(abs, ord, data) {
 
     var res = [];
     var tmp = [];
+	console.log(abs + " " + ord)
     res.push([abs, ord]);
     $.each(data, function (index) {
-        if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") res.push([parseFloat(this[abs]), parseFloat(this[ord])]);
+		/*
+		if(X == "time" && this[ord] !== undefined && this[ord] != "NA")
+			res.push([parseFloat(timeArray[index]), parseFloat(this[ord])]);
+		else if(Y == "time" && this[abs] !== undefined && this[abs] != "NA")
+			res.push([parseFloat(this[abs]), parseFloat(timeArray[index])]);
+        else 
+		*/
+		if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") 
+			res.push([parseFloat(this[abs]), parseFloat(this[ord])]);
     });
     console.log(res);
     return res;
@@ -134,7 +143,7 @@ function getHeader(){
 // Callback that creates and populates a data table, 
 // instantiates the chart, passes in the data and
 // draws it.
-function drawChart() {
+function drawChart(idgraph) {
 
     	var myData;
     	
@@ -154,7 +163,7 @@ function drawChart() {
 				pointSize: 5
 			};
 			myData = JSONextractNumber(X,Y,activeData);
-			chart = new google.visualization.ScatterChart(document.getElementById('graph'));			
+			chart = new google.visualization.ScatterChart(document.getElementById(idgraph));			
 			break;
 		case "bar" : 
 			options = {
@@ -165,7 +174,7 @@ function drawChart() {
 			  height: 480
 			};
 			myData = JSONextractString(X,Y,activeData);
-			chart = new google.visualization.BarChart(document.getElementById('graph'));
+			chart = new google.visualization.BarChart(document.getElementById(idgraph));
 			break;
 		case "column" : 
 			options = {
@@ -176,7 +185,7 @@ function drawChart() {
 			  height: 480
 			};
 			myData = JSONextractSort(X,Y,activeData);
-			chart = new google.visualization.ColumnChart(document.getElementById('graph'));
+			chart = new google.visualization.ColumnChart(document.getElementById(idgraph));
 			break;
 		case "line" : 
 			options = {
@@ -187,7 +196,7 @@ function drawChart() {
 			  height: 480
 			};
 			myData = JSONextractSort(X,Y,activeData);
-			chart = new google.visualization.LineChart(document.getElementById('graph'));
+			chart = new google.visualization.LineChart(document.getElementById(idgraph));
 			break;
 		case "pie" :
 			options = {
@@ -198,7 +207,7 @@ function drawChart() {
 			  height: 480
 			};
 			myData = JSONextractCount(X,activeData);
-			chart = new google.visualization.PieChart(document.getElementById('graph'));
+			chart = new google.visualization.PieChart(document.getElementById(idgraph));
 			break;
 		default : 
 			break;
@@ -208,7 +217,19 @@ function drawChart() {
     chart.draw(data, options);
 
 }
-
+/*
+			options = {
+			  title: X + ' vs. ' + Y,
+			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
+			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
+			  width: 800,
+			  height: 480
+			};
+			myData = JSONextractCount(X,activeData);
+			chart = new google.visualization.PieChart(document.getElementById('graph'));
+			var data = google.visualization.arrayToDataTable(myData);
+			chart.draw(data, options);
+*/
 
 $(document).ready(function () {
 
