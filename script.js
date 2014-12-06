@@ -243,7 +243,11 @@ $(document).ready(function () {
         Y = $('#ord-input').val();
         console.log('drawing...');
         drawChart("graph");
-        drawPie("pie_1");
+        drawPie("pie_1", "node");
+		drawPie("pie_2", "e.dmfs");
+		drawPie("pie_3", "e.dfs");
+		drawPie("pie_4", "e.os");
+		drawPie("pie_5", "tissue");
     });
 
     $('#btn-reset').click(function () {
