@@ -68,7 +68,7 @@ function JSONextractNumber(abs, ord, data) {
     var tmp = [];
     res.push([abs, ord]);
     $.each(data, function (index) {
-        if (this[abs] !== undefined && this[ord] !== undefined) res.push([parseFloat(this[abs]), parseFloat(this[ord])]);
+        if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") res.push([parseFloat(this[abs]), parseFloat(this[ord])]);
     });
     console.log(res);
     return res;
@@ -81,7 +81,7 @@ function JSONextractString(abs, ord, data) {
     var tmp = [];
     res.push([abs, ord]);
     $.each(data, function (index) {
-        if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
+        if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") res.push([this[abs], parseFloat(this[ord])]);
     });
     console.log(res);
     return res;
@@ -94,7 +94,7 @@ function JSONextractSort(abs, ord, data) {
     var tmp = [];
 	res.push([0,0]);
     $.each(data, function (index) {
-        if (this[abs] !== undefined && this[ord] !== undefined) res.push([this[abs], parseFloat(this[ord])]);
+        if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") res.push([this[abs], parseFloat(this[ord])]);
     });
     
 	res.sort(/*[{column:1},{column:0}]*/);
