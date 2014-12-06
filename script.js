@@ -263,6 +263,7 @@ $(document).ready(function () {
 		drawPie("pie_3", "e.dfs");
 		drawPie("pie_4", "e.os");
 		drawPie("pie_5", "tissue");
+		drawScatter("scatter_1","age","t.dfs","t.os");
     });
 
     $('#btn-reset').click(function () {
