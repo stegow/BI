@@ -2,6 +2,7 @@ var activeData;
 var X;
 var Y;
 var headers;
+var timeArray;
 
 //var csv is the CSV file with headers
 function csvJSON(csv, sep) {
@@ -211,6 +212,11 @@ function drawChart() {
 
 $(document).ready(function () {
 
+	timeArray = [];
+	for(var i = 0; i < 7000; i++)
+		timeArray[i] = i;
+
+	console.log(timeArray);
     $('#btn-draw').click(function () {
         X = $('#abs-input').val();
         Y = $('#ord-input').val();
