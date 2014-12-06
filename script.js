@@ -243,6 +243,7 @@ $(document).ready(function () {
         Y = $('#ord-input').val();
         console.log('drawing...');
         drawChart();
+        drawPie();
     });
 
     $('#btn-reset').click(function () {
