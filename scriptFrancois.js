@@ -3,7 +3,7 @@ var myData;
 var data;
 var chart;
 
-function drawPie(var id) {
+function drawPie(id) {
   			options = {
 			  title: X + ' vs. ' + Y,
 			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
