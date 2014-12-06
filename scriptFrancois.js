@@ -3,8 +3,8 @@ function drawPie(id, column) {
 			  title: column,
 			  vAxis: {title: X,  titleTextStyle: {color: 'red'}},
 			  hAxis: {title: Y,  titleTextStyle: {color: 'red'}},
-			  width: 800,
-			  height: 480
+			  width: 180,
+			  height: 108
 			};
 			myData = JSONextractCount(column,activeData);
 			chart = new google.visualization.PieChart(document.getElementById(id));
