@@ -66,7 +66,6 @@ function upload(file) {
 function JSONextractNumber(abs, ord, data) {
 
     var res = [];
-    var tmp = [];
 	console.log(abs + " " + ord)
     res.push([abs, ord]);
     $.each(data, function (index) {
@@ -88,7 +87,6 @@ function JSONextractNumber(abs, ord, data) {
 function JSONextractNumber2(abs, ord1, ord2, data) {
 
     var res = [];
-    var tmp = [];
 	console.log(abs + " " + ord1 + " " + ord2)
     res.push([abs, ord1, ord2]);
     $.each(data, function (index) {
@@ -103,7 +101,6 @@ function JSONextractNumber2(abs, ord1, ord2, data) {
 function JSONextractString(abs, ord, data) {
 
     var res = [];
-    var tmp = [];
     res.push([abs, ord]);
     $.each(data, function (index) {
         if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") res.push([this[abs], parseFloat(this[ord])]);
@@ -116,7 +113,6 @@ function JSONextractString(abs, ord, data) {
 function JSONextractSort(abs, ord, data) {
 
     var res = [];
-    var tmp = [];
 	res.push([0,0]);
     $.each(data, function (index) {
         if (this[abs] !== undefined && this[ord] !== undefined && this[ord] != "NA" && this[abs] != "NA") res.push([this[abs], parseFloat(this[ord])]);
@@ -131,7 +127,6 @@ function JSONextractSort(abs, ord, data) {
 
 function JSONextractCount(abs, data){
 	var res = [];
-	var tmp = [];
 	var zero = 0, un = 0;
 	$.each(data, function(index){
 		if (this[abs] === undefined) {}
@@ -142,6 +137,39 @@ function JSONextractCount(abs, data){
 	res[0] = [abs,""];
 	res[1] = ["false", zero];
 	res[2] = ["true", un];
+	return res;
+}
+
+function JSONextractCountAndSort(abs, ecart, data, discret){
+	var res = [];
+	ecart = parseFloat(ecart);
+	var min=2147483647, max=0;
+	
+	res.push(["",""]);
+	$.each(data, function(index) {
+		if (parseFloat(this[abs]) < min){
+			min = this[abs];
+		}
+		if (parseFloat(this[abs]) >max){
+			max = parseFloat(this[abs]);
+		}
+	});
+	var nbCol= Math.ceil((max-min)/ecart);
+	var minTmp = parseFloat(min);
+	var title;
+	for(var i=0; i<=nbCol; i++){
+		var cpt=0;
+		$.each(data, function(index){
+			if(parseFloat(this[abs]) >=minTmp && parseFloat(this[abs]) < (minTmp + ecart)){
+				cpt++;
+			}
+		});
+		discret?title=minTmp:title=minTmp + " - " + (minTmp+ecart);
+		res.push([title, cpt]);
+		minTmp +=ecart;	
+	}
+	console.log("count and sort");
+	console.log(res);
 	return res;
 }
 
@@ -264,6 +292,9 @@ $(document).ready(function () {
 		drawPie("pie_4", "e.os");
 		drawPie("pie_5", "tissue");
 		drawScatter("scatter_1","age","t.dfs","t.os");
+		drawHistogram("hist_1","age",1, true);
+		drawHistogram("hist_2","size",0.5, false);
+		drawHistogram("hist_3","grade",1, true);
     });
 
     $('#btn-reset').click(function () {
