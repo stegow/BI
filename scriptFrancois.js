@@ -12,9 +12,9 @@ function drawPie(id, column) {
 			chart.draw(data, options);
 }
 
-function drawScatter(id, row, cols) {
+function drawScatter(id, row,column1, column2) {
   			options = {
-				title: cols.col2 + " && " + cols.col1 + " vs " + row,
+				title: X + ' vs. ' + Y,
 				width: $(id).width(),
 				height: 480,
 				titleX: X,
@@ -22,7 +22,7 @@ function drawScatter(id, row, cols) {
 				legend: 'none',
 				pointSize: 5
 			};
-			myData = JSONextractNumber2(row,cols.col1,cols.col2,activeData);
+			myData = JSONextractNumber2(row,column1,column2,activeData);
 			chart = new google.visualization.ScatterChart(document.getElementById(id));
 			data = google.visualization.arrayToDataTable(myData);
 			chart.draw(data, options);
