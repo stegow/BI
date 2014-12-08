@@ -295,6 +295,7 @@ $(document).ready(function () {
 		drawHistogram("hist_1","age",1, true);
 		drawHistogram("hist_2","size",0.5, false);
 		drawHistogram("hist_3","grade",1, true);
+		drawKaplanMeier("kaplan_1");
     });
 
     $('#btn-reset').click(function () {
